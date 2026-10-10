@@ -1,0 +1,21 @@
+# Hardware Simulation Parameters
+
+memory:
+  gpu_dram_mb: 4096      # GPU VRAM capacity allocated for KV cache
+  host_dram_mb: 16384    # Host DRAM capacity for prefetch buffer & caching
+  ssd_capacity_gb: 512   # Simulated SSD capacity
+
+ssd:
+  channels: 8            # Number of flash channels
+  dies_per_channel: 4    # Number of dies per channel (total dies = 32)
+  planes_per_die: 2      # Planes per die (total planes = 64)
+  blocks_per_plane: 512  # Flash blocks per plane
+  pages_per_block: 128   # Pages per flash block
+  page_size_bytes: 4096  # 4 KB flash page
+
+timing:
+  t_r_us: 25.0           # NAND page read latency (microseconds)
+  t_prog_us: 200.0       # NAND page program latency (microseconds)
+  t_bers_us: 2000.0      # NAND block erase latency (microseconds)
+  bus_transfer_us_per_page: 5.0 # Channel bus transfer latency per 4KB
+  pcie_overhead_us: 10.0 # NVMe/PCIe command dispatch and DMA latency

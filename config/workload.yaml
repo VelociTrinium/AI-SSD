@@ -1,0 +1,23 @@
+# LLM Model & Workload Configuration
+
+model:
+  name: "llama-like-8b"
+  layers: 32
+  heads: 32
+  head_dim: 128
+  kv_heads: 32           # 32 for MHA, or 4/8 for GQA
+
+kv:
+  dtype: "FP16"          # "FP16" (2 bytes) or "FP8" (1 byte)
+  block_tokens: 16       # 16 tokens per block
+  kv_heads_per_block: 1  # 1 head per block by default (4KB FP16)
+
+workload:
+  context_lengths:
+    - 4096
+    - 8192
+    - 16384
+    - 32768
+  default_context_length: 32768
+  generate_tokens: 128
+  batch_size: 1

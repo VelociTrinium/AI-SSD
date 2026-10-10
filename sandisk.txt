@@ -1,0 +1,39 @@
+wsl -d Ubuntu
+
+cd /mnt/c/_D-Drive/_Codes/_GitHub/ai-ssd
+source ~/.venvs/ai-ssd/bin/activate
+python scripts/run_quick_comparison.py
+
+.venv\Scripts\streamlit run person3_system/dashboard/dashboard.py
+streamlit run dashboard/app.py
+
+
+source ~/.venvs/ai-ssd/bin/activate
+
+python scripts/run_quick_comparison.py --model Qwen/Qwen3-2B --context 2048
+python scripts/run_quick_comparison.py --model Qwen/Qwen3-2B --context 2048 --storage-mode file
+python scripts/run_quick_comparison.py --model Qwen/Qwen3-2B --context 16384 --storage-mode file
+
+
+python scripts/run_quick_comparison.py --model Qwen/Qwen3-8B --context 2048
+
+
+
+python scripts/context_scaling_worker.py \
+    --mode aissd \
+    --storage-mode file \
+    --model-name Qwen/Qwen2.5-0.5B \
+    --context 512 \
+    --decode 16 \
+    --threads 4 \
+    --output-json /tmp/aissd_05b.json
+
+
+
+python scripts/context_scaling_worker.py \
+    --mode baseline \
+    --model-name Qwen/Qwen2.5-0.5B \
+    --context 512 \
+    --decode 16 \
+    --threads 4 \
+    --output-json /tmp/baseline_05b.json
